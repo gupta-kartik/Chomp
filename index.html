@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>CHOMP! · Tech After Dark Singapore</title>
 <style>
-  html, body { margin: 0; height: 100%; background: #000; }
+  html, body { margin: 0; height: 100%; background: #f4efe4; color: #1b1f3b; }
   body { display: flex; align-items: center; justify-content: center; }
   canvas { height: 96vh; max-width: 96vw; object-fit: contain; touch-action: none; }
 </style>
@@ -24,15 +24,15 @@
 const THEME = {
   title: 'CHOMP!',
   colors: {
-    background: '#000000', wall: '#2121de', door: '#ffb8ff', dot: '#ffb897', pellet: '#ffb897',
-    player: '#ffff00', text: '#ffffff', accent: '#ffff00', popup: '#00ffff',
-    frightened: '#2121ff', frightenedFlash: '#ffffff', frightenedFace: '#ffb8ae',
+    background: '#fdf8ee', wall: '#3f51b5', door: '#d81b80', dot: '#b8652f', pellet: '#b8652f',
+    player: '#e69500', text: '#1b1f3b', accent: '#c25e00', popup: '#00796b',
+    frightened: '#283593', frightenedFlash: '#7986cb', frightenedFace: '#fff3e0',
   },
   ghosts: [
-    { name: 'Red', color: '#ff0000' },
-    { name: 'Pink', color: '#ffb8ff' },
-    { name: 'Cyan', color: '#00ffff' },
-    { name: 'Orange', color: '#ffb852' },
+    { name: 'Red', color: '#e0201b' },
+    { name: 'Pink', color: '#e0559e' },
+    { name: 'Cyan', color: '#0097a7' },
+    { name: 'Orange', color: '#f57c00' },
   ],
   text: {
     start: 'PRESS SPACE TO START', controls: 'ARROWS / WASD TO MOVE · P PAUSE · M MUTE', muted: 'MUTED',
@@ -451,7 +451,7 @@ function drawHud() {
 function centerText(text, y, size, color) {
   ctx.font = `bold ${size}px ${FONT}`; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
   const w = ctx.measureText(text).width + 24;
-  ctx.fillStyle = 'rgba(0,0,0,0.8)'; ctx.fillRect(W / 2 - w / 2, y - size * 0.9, w, size * 1.8);
+  ctx.fillStyle = 'rgba(255,252,245,0.9)'; ctx.fillRect(W / 2 - w / 2, y - size * 0.9, w, size * 1.8);
   ctx.fillStyle = color; ctx.fillText(text, W / 2, y);
 }
 
@@ -459,7 +459,7 @@ function drawOverlay() {
   const midY = HUD + (houseCenter.y + 2.5) * TILE;
   const c = THEME.colors, t = THEME.text;
   if (state.phase === 'title') {
-    ctx.fillStyle = 'rgba(0,0,0,0.7)'; ctx.fillRect(0, 0, W, H);
+    ctx.fillStyle = 'rgba(253,248,238,0.8)'; ctx.fillRect(0, 0, W, H);
     centerText(THEME.title, H * 0.38, 64, c.accent);
     if (Math.floor(state.time * 2) % 2 === 0) centerText(t.start, H * 0.52, 20, c.text);
     centerText(t.controls, H * 0.6, 13, c.text);
@@ -467,7 +467,7 @@ function drawOverlay() {
   else if (state.phase === 'paused') centerText(t.paused, midY, 22, c.text);
   else if (state.phase === 'levelclear') centerText(t.levelClear, midY, 22, c.accent);
   else if (state.phase === 'gameover') {
-    centerText(t.gameOver, midY, 26, '#ff4d4d');
+    centerText(t.gameOver, midY, 26, '#c62828');
     centerText(t.start, midY + TILE * 2, 14, c.text);
   }
 }
